@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:07:55 by retcheba          #+#    #+#             */
-/*   Updated: 2022/09/27 02:11:25 by retcheba         ###   ########.fr       */
+/*   Updated: 2022/09/27 09:34:44 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,37 +40,42 @@ static char	*ft_strstr_from_begin(char *str, char *to_find)
 	return (str);
 }
 
-char	*get_cmd_path(char *cmd, char **envp)
+static char	**ft_get_all_paths(char **envp)
 {
-	char	*envp_PATH;
 	char	**paths;
-	char	*cmd_path;
+	char	*envp_path;
 	char	*tmp;
 	int		i;
 
-	i = 0;
-	while (envp[i])
+	i = -1;
+	while (envp[++i])
 	{
-		envp_PATH = ft_strstr_from_begin(envp[i], "PATH=");
-		if (envp_PATH)
+		envp_path = ft_strstr_from_begin(envp[i], "PATH=");
+		if (envp_path)
 		{
-			envp_PATH = ft_substr(envp_PATH, 5, (ft_strlen(envp[i]) - 5)); // On malloc
-			break;
+			envp_path = ft_substr(envp_path, 5, (ft_strlen(envp[i]) - 5));
+			break ;
 		}
-		i++;
 	}
-	paths = ft_split(envp_PATH, ':');
-	free(envp_PATH);
-	envp_PATH = NULL;
-	i = 0;
-	while (paths[i])
+	paths = ft_split(envp_path, ':');
+	free(envp_path);
+	i = -1;
+	while (paths[++i])
 	{
 		tmp = paths[i];
 		paths[i] = ft_strjoin(paths[i], "/");
 		free(tmp);
-        tmp = NULL;
-		i++;
 	}
+	return (paths);
+}
+
+char	*get_cmd_path(char *cmd, char **envp)
+{
+	char	**paths;
+	char	*cmd_path;
+	int		i;
+
+	paths = ft_get_all_paths(envp);
 	i = 0;
 	while (paths[i])
 	{
