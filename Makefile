@@ -1,7 +1,7 @@
-SRCS		= main.c
+SRCS		= main.c get_cmd_path.c execute_cmds.c
 OBJS		= $(addprefix srcs/, $(SRCS:.c=.o))
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror 
+CFLAGS		= -g -Wall -Wextra -Werror 
 NAME		= pipex
 RM			= rm -f
 LIBFT		= libft/libft.a

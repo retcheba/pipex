@@ -6,14 +6,15 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 17:21:34 by retcheba          #+#    #+#             */
-/*   Updated: 2022/09/24 17:25:15 by retcheba         ###   ########.fr       */
+/*   Updated: 2022/09/27 04:01:57 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	ft_printf("Hello World!\n");
+	if (argc == 5)
+		ft_execute_cmds(argv, envp);
 	return (0);
 }

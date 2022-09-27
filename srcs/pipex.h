@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 17:23:10 by retcheba          #+#    #+#             */
-/*   Updated: 2022/09/24 17:24:07 by retcheba         ###   ########.fr       */
+/*   Updated: 2022/09/27 03:55:23 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 # define PIPEX_H
 
 # include "../libft/libft.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+
+char	*get_cmd_path(char *cmd, char **envp);
+int		ft_execute_cmds(char **argv, char **envp);
 
 #endif
