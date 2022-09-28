@@ -1,4 +1,4 @@
-SRCS		= main.c get_cmd_path.c execute_cmds.c
+SRCS		= main.c get_cmd_path.c execute_cmds.c pipex_error.c pipex_utils.c
 OBJS		= $(addprefix srcs/, $(SRCS:.c=.o))
 CC			= gcc
 CFLAGS		= -g -Wall -Wextra -Werror 
