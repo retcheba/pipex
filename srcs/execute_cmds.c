@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 05:04:03 by retcheba          #+#    #+#             */
-/*   Updated: 2022/09/28 04:23:48 by retcheba         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:58:27 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ static void	child_two(t_struct *pipex, char **envp)
 {
 	dup2(pipex->fds[0], 0);
 	dup2(pipex->fd_out, 1);
-	ft_close_fd(pipex);
+	close(pipex->fds[0]);
+	close(pipex->fds[1]);
+	if (pipex->fd_in != -1)
+		close(pipex->fd_in);
+	close(pipex->fd_out);
 	execve(pipex->cmd_path2, pipex->cmd2, envp);
 }
 
@@ -37,9 +41,8 @@ int	ft_execute_cmds(t_struct *pipex, char **argv, char **envp)
 		perror("Error");
 	else if (!(check_cmd1(pipex, argv, envp)))
 	{
+		pipex->child1 = 1;
 		pipex->pid1 = fork();
-		if (pipex->pid1 == -1)
-			return (1);
 		if (pipex->pid1 == 0)
 			child_one(pipex, envp);
 	}
@@ -48,13 +51,11 @@ int	ft_execute_cmds(t_struct *pipex, char **argv, char **envp)
 		perror("Error");
 	else if (!(check_cmd2(pipex, argv, envp)))
 	{
+		pipex->child2 = 1;
 		pipex->pid2 = fork();
-		if (pipex->pid2 == -1)
-			return (1);
 		if (pipex->pid2 == 0)
 			child_two(pipex, envp);
 	}
-	ft_close_fd(pipex);
-	ft_wait_end_fork(pipex);
+	ft_close_free_wait(pipex);
 	return (0);
 }

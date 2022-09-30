@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 17:23:10 by retcheba          #+#    #+#             */
-/*   Updated: 2022/09/28 04:43:53 by retcheba         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:45:08 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_struct
 	int		fds[2];
 	int		fd_in;
 	int		fd_out;
+	int		child1;
+	int		child2;
 	char	**cmd1;
 	char	*cmd_path1;
 	char	**cmd2;
@@ -40,8 +42,7 @@ int		check_cmd2(t_struct *pipex, char **argv, char **envp);
 //pipex utils
 void	ft_free_paths(char **paths);
 void	ft_free_var(char *cmd_path, char **cmd);
-void	ft_close_fd(t_struct *pipex);
-void	ft_wait_end_fork(t_struct *pipex);
+void	ft_close_free_wait(t_struct *pipex);
 char	*detach_cmd_from_path(char *cmd_path);
 
 #endif

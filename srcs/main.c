@@ -6,7 +6,7 @@
 /*   By: retcheba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 17:21:34 by retcheba          #+#    #+#             */
-/*   Updated: 2022/09/28 04:14:04 by retcheba         ###   ########.fr       */
+/*   Updated: 2022/09/28 16:46:15 by retcheba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 5)
 	{
 		pipe(pipex.fds);
+		pipex.child1 = 0;
+		pipex.child2 = 0;
 		ft_execute_cmds(&pipex, argv, envp);
 	}
 	else
