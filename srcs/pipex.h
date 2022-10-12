@@ -42,7 +42,6 @@ int		check_cmd2(t_struct *pipex, char **argv, char **envp);
 //pipex utils
 void	ft_free_paths(char **paths);
 void	ft_free_var(char *cmd_path, char **cmd);
-void	ft_close_free_wait(t_struct *pipex);
 char	*detach_cmd_from_path(char *cmd_path);
 
 #endif
